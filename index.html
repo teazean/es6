@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 new features</title>
+    <link rel="stylesheet" href="http://teazean.com/assets/themes/twitter/css/prettify.css">
+    <script src="http://teazean.com/assets/themes/twitter/js/prettify.js"></script>
+    <script src="http://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="http://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+    <script type="text/javascript">
+        window.System = new traceur.runtime.BrowserTraceurLoader();
+        System.map = System.semverMap(System.version);
+    </script>
+</head>
+<body>
+    <select id="select">
+        <option value="arguments">arguments</option>
+        <option value="arrows">arrows</option>
+        <option value="class">class</option>
+        <option value="destructuring">destructuring</option>
+        <option value="enhancedObjectLiterals">enhancedObjectLiterals</option>
+        <option value="generators">generators</option>
+        <option value="iterator-forof">iterator-forof</option>
+        <option value="let-const">let-const</option>
+        <option value="map-set">map-set</option>
+        <option value="module">module</option>
+        <option value="promises">promises</option>
+        <option value="proxy-reflect">proxy-reflect</option>
+        <option value="symbol">symbol</option>
+        <option value="tailcall">tailcall</option>
+        <option value="templateString">templateString</option>
+        <option value="unicode">unicode</option>
+    </select>
+    <pre id="pre" class="prettyprint" style="font-size:14px;"></pre>
+    <script type="text/javascript">
+        var s = document.querySelector("#select"),
+            pre = document.querySelector("#pre");
+
+        req(s.value);
+        function req(v) {
+            console.clear();
+            var xhr = new XMLHttpRequest();
+            var url = 'js/'+v+".js";
+            xhr.open('get', url);
+            xhr.onload = function(e){
+                var a = e.target.responseText;
+                pre.innerHTML = a;
+                prettyPrint();
+            }
+            xhr.send();
+            System.import(url).then(function(m) {
+            });
+        }
+        s.addEventListener("change", function(e) {
+            req(e.target.value);
+        });
+    </script>
+</body>
+</html>
