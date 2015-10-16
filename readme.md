@@ -28,6 +28,8 @@ npm环境：babel：e6到es5的转换器
 html环境:
 traceur
     
+    npm install babel-core
+
     <script src="http://google.github.io/traceur-compiler/bin/traceur.js"></script>
     <script src="http://google.github.io/traceur-compiler/src/bootstrap.js"></script>
     <script type="module" src="js/proxy-reflect.js"></script>
