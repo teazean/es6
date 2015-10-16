@@ -5,8 +5,9 @@
 
 
 node.js：harmony模式
-node --harmony
-node -v8-options | grep harmony
+
+    node --harmony
+    node -v8-options | grep harmony
 
 执行:
 npm环境：babel：e6到es5的转换器
