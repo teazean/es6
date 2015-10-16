@@ -32,10 +32,12 @@
         <option value="unicode">Unicode 统一码</option>
     </select>
     <span>请打开开发者工具，观察代码输出</span>
-    <pre id="pre" class="prettyprint" style="font-size:14px;"></pre>
+    <pre id="pre" class="prettyprint" contentEditable style="font-size:14px;"></pre>
+    <button id="run">执行</button>
     <script type="text/javascript">
         var s = document.querySelector("#select"),
-            pre = document.querySelector("#pre");
+            pre = document.querySelector("#pre"),
+            run = document.querySelector("#run");
 
         req(s.value);
         function req(v) {
@@ -47,13 +49,18 @@
                 var a = e.target.responseText;
                 pre.innerHTML = a;
                 prettyPrint();
+                System.script(a);
             }
             xhr.send();
-            System.import(url).then(function(m) {
-            });
+            // System.import(url).then(function(m) {
+            // });
         }
         s.addEventListener("change", function(e) {
             req(e.target.value);
+        });
+        run.addEventListener("click", function(e) {
+            console.log("----- run -----");
+            System.script(pre.innerText);
         });
     </script>
 </body>
