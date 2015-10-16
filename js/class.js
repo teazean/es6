@@ -11,16 +11,13 @@ class Animal{
     constructor(age){
         this.age = age;
     }
-
     sleep() {
         //dosomething 
     }
-
     eat() {
         //dosomething 
         console.log("animal eat!");
     }
-
     static toAnimal(object){
         //dosomething    
     }
@@ -32,12 +29,10 @@ class Dog extends Animal{
         super(age);
         this.color = color;
     }
-
     eat() {
         super.eat();
         console.log("dog eat!");
     }
-
 }
 
 var dog = new Dog(11, "red");

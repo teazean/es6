@@ -13,28 +13,31 @@
     </script>
 </head>
 <body>
-    <select id="select">
-        <option value="arguments">arguments</option>
-        <option value="arrows">arrows</option>
-        <option value="class">class</option>
-        <option value="destructuring">destructuring</option>
-        <option value="enhancedObjectLiterals">enhancedObjectLiterals</option>
-        <option value="generators">generators</option>
-        <option value="iterator-forof">iterator-forof</option>
-        <option value="let-const">let-const</option>
-        <option value="map-set">map-set</option>
-        <option value="module">module</option>
-        <option value="promises">promises</option>
-        <option value="proxy-reflect">proxy-reflect</option>
-        <option value="symbol">symbol</option>
-        <option value="tailcall">tailcall</option>
-        <option value="templateString">templateString</option>
-        <option value="unicode">unicode</option>
+    <select id="select" style="margin-right:20px;">
+        <option value="arguments">Default + Rest + Spread 默认参数+不定参数+参数展开</option>
+        <option value="arrows">Arrows 箭头函数</option>
+        <option value="class">Classes 类</option>
+        <option value="destructuring">Destructuring 解构</option>
+        <option value="enhancedObjectLiterals">Enhanced Object Literals 增强的对象字面量</option>
+        <option value="generators">Generators 生成器</option>
+        <option value="iterator-forof">Iterators 迭代器 + For..Of 循环</option>
+        <option value="let-const">Let + Const 操作符</option>
+        <option value="map-set">Map + Set + Weakmap + Weakset 数据结构</option>
+        <option value="module">Modules 模块</option>
+        <option value="promises">Promises 对象(延迟对象)</option>
+        <option value="proxy-reflect">Proxies 代理-Reflect 反射 API</option>
+        <option value="symbol">Symbols 符号</option>
+        <option value="tailcall">Tail Calls 尾调用</option>
+        <option value="templateString">Template Strings 模板字符串</option>
+        <option value="unicode">Unicode 统一码</option>
     </select>
-    <pre id="pre" class="prettyprint" style="font-size:14px;"></pre>
+    <span>请打开开发者工具，观察代码输出</span>
+    <pre id="pre" class="prettyprint" contentEditable style="font-size:14px;"></pre>
+    <button id="run">执行</button>
     <script type="text/javascript">
         var s = document.querySelector("#select"),
-            pre = document.querySelector("#pre");
+            pre = document.querySelector("#pre"),
+            run = document.querySelector("#run");
 
         req(s.value);
         function req(v) {
@@ -46,13 +49,18 @@
                 var a = e.target.responseText;
                 pre.innerHTML = a;
                 prettyPrint();
+                System.script(a);
             }
             xhr.send();
-            System.import(url).then(function(m) {
-            });
+            // System.import(url).then(function(m) {
+            // });
         }
         s.addEventListener("change", function(e) {
             req(e.target.value);
+        });
+        run.addEventListener("click", function(e) {
+            console.log("----- run -----");
+            System.script(pre.innerText);
         });
     </script>
 </body>
