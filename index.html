@@ -6,12 +6,7 @@
     <title>ES6 new features</title>
     <link rel="stylesheet" href="http://teazean.com/assets/themes/twitter/css/prettify.css">
     <script src="http://teazean.com/assets/themes/twitter/js/prettify.js"></script>
-    <script src="http://google.github.io/traceur-compiler/bin/traceur.js"></script>
-    <script src="http://google.github.io/traceur-compiler/src/bootstrap.js"></script>
-    <script>
-        // window.System = new traceur.runtime.BrowserTraceurLoader();
-        // System.map = System.semverMap(System.version);
-    </script>
+    <script src="babel.min.js"></script>
 </head>
 <body>
     <p style="color:red;">1. 请打开开发者工具-console控制台，观察代码输出</p>
@@ -56,21 +51,14 @@
         <a href="https://github.com/teazean/es6" style="display:block;text-indent:40px;">https://github.com/teazean/es6</a>
     </div>
     <script type="text/javascript">
-        window.TraceurLoader = traceur.runtime.BrowserTraceurLoader;
         var s = document.querySelector("#select"),
             pre = document.querySelector("#pre"),
             run = document.querySelector("#run");
 
         function execute(text) {
-            var loader = new TraceurLoader();
-            loader.map = loader.semverMap(loader.version);
-
-            loader.script(text).then(function() {
-                console.log("执行成功！");
-            }, function(error){
-                console.log("执行失败！");
-                console.log(error);
-            });
+            var code = Babel.transform(text, { presets: ['es2015'] }).code;
+            var fn = new Function(code);
+            fn.call(window);
         };
         function req(v) {
             console.clear();
